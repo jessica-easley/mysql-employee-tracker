@@ -33,3 +33,10 @@ THEN I am prompted to select an employee to update and their new role and this i
  * MySQL
  * Node.js
  * Inquirer
+
+# Installation
+Download or clone repository to use this application on local machine.
+Node.js is required to run the application
+To install necessary dependencies, run the following command : npm i inquirer@8.2.4.
+
+# Screenshots of Application
