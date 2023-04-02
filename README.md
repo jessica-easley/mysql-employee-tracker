@@ -3,7 +3,7 @@
 # Description
 This application is an CMS interface. It is a command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
-# View Walkthrough Video Here:
+# View Walkthrough Video Here: https://watch.screencastify.com/v/nb7bJOQpEXcyV4izPVxK
 
 # User Story
 AS A business owner

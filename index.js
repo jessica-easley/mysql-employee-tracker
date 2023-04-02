@@ -1,3 +1,5 @@
+console.log('I am running!')
+
 const { prompt } = require("inquirer");
 // const logo = require("asciiart-logo");
 const db = require("./db");
@@ -43,9 +45,9 @@ function loadPrompts() {
           {
             name: "Quit",
             value: "QUIT",
-          },
-        ],
-      },
+          }
+        ]
+      }
     ])
     .then((answers) => {
       switch (answers.prompt) {
@@ -73,7 +75,8 @@ function loadPrompts() {
           default:
         quit();
       }
-    });
+    }
+  )
 }
 
 function displayEmployees() {
@@ -138,16 +141,19 @@ function addEmployee() {
             loadPrompts();
           }
         }
-      );
-    });
+      )
+    })
 }
 function updateRole() {}
 
 function displayDepartments() {
-  sql.query("SELECT * FROM departments", (err, data) => {
-    console.table(data);
-    loadPrompts();
-  });
+  db.findAllDepartments()
+  .then(([rows]) => {
+    let roles = rows;
+    console.log("\n");
+  console.table(departments);
+  })
+  .then(() => loadPrompts());
 }
 
 function addDept() {
@@ -155,7 +161,7 @@ function addDept() {
       {
         type: "input",
         name: "departmentTitle",
-        message: "WHAT IS THE TITLE OF THE NEW DEPARTMENT",
+        message: "WHAT IS THE TITLE OF THE NEW DEPARTMENT?",
       },
     ])
     .then((input) => {
@@ -177,28 +183,31 @@ function addDept() {
 }
 
 function displayRoles() {
-  sql.query("SELECT * FROM roles", (err, data) => {
-    console.table(data);
-    loadPrompts();
-  });
-}
+  db.findAllRoles()
+    .then(([rows]) => {
+      let roles = rows;
+      console.log("\n");
+    console.table(roles);
+    })
+    .then(() => loadPrompts());
+  }
 
 function addRole() {
   prompt([
       {
         type: "input",
         name: "role",
-        message: "WHAT IS THE NEW ROLE TITLE",
+        message: "WHAT IS THE NEW ROLE TITLE?",
       },
       {
         type: "input",
         name: "salary",
-        message: "WHAT IS THE SALARY OF THE NEW ROLE",
+        message: "WHAT IS THE SALARY OF THE NEW ROLE?",
       },
       {
         type: "input",
         name: "department",
-        message: "WHAT DEPARTMENT DOES THE ROLE BELONG TO",
+        message: "WHAT DEPARTMENT DOES THE ROLE BELONG TO?",
       },
     ])
     .then((input) => {
