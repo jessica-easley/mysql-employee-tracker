@@ -1,12 +1,12 @@
-const { prompt, default: inquirer } = require("inquirer");
+const { prompt } = require("inquirer");
+// const logo = require("asciiart-logo");
 const db = require("./db");
 require("console.table");
 
 // init();
 
 function loadPrompts() {
-  inquirer
-    .prompt([
+  prompt([
       {
         type: "list",
         name: "choice",
@@ -77,15 +77,17 @@ function loadPrompts() {
 }
 
 function displayEmployees() {
-  sql.query("SELECT * FROM employees", (err, data) => {
-    console.table(data);
-    loadPrompts();
-  });
-}
+  db.findAllEmployees()
+  .then(([rows]) => {
+    let employees = rows;
+    console.log("\n")
+    console.table(employees);
+  })
+  .then(() => loadPrompts());
+  }
 
 function addEmployee() {
-  inquirer
-    .prompt([
+  prompt([
       {
         type: "input",
         name: "first_name",
@@ -149,8 +151,7 @@ function displayDepartments() {
 }
 
 function addDept() {
-  inquirer
-    .prompt([
+  prompt([
       {
         type: "input",
         name: "departmentTitle",
@@ -183,8 +184,7 @@ function displayRoles() {
 }
 
 function addRole() {
-  inquirer
-    .prompt([
+  prompt([
       {
         type: "input",
         name: "role",
